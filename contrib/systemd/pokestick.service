@@ -1,0 +1,15 @@
+[Unit]
+Description=Pokestick USB Hardware Watchdog Daemon
+After=local-fs.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/pokestick serve
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+
