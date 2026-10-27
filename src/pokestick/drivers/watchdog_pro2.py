@@ -168,7 +168,7 @@ def decode_config_response(data: bytes) -> ConfigDigits:
 def encode_config_request(digits: ConfigDigits) -> bytes:
     if len(digits) != 11:
         raise ValueError(
-            f"The lenght of the config tuple should be 11, provided tuple has {len(digits)} items"
+            f"The length of the config tuple should be 11, provided tuple has {len(digits)} items"
         )
     if not all(0 <= x < 16 for x in digits):
         raise ValueError(f"All values should be in range 0-15, {digits:r} is given")
