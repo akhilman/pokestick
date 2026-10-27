@@ -159,7 +159,7 @@ def find_device(device: str | None) -> DeviceId:
 
 def dump_config(config: Config, args: argparse.Namespace):
     device_id = find_device(args.device or config.get("main", {}).get("device"))
-    watchdog = drivers.init_device(device_id)
+    watchdog = drivers.create_device(device_id)
     config = deep_update(
         {
             "main": {
@@ -176,7 +176,7 @@ def dump_config(config: Config, args: argparse.Namespace):
 
 def serve(config: Config, args: argparse.Namespace):
     device_id = find_device(args.device or config.get("main", {}).get("device"))
-    watchdog = drivers.init_device(device_id)
+    watchdog = drivers.create_device(device_id)
     watchdog.update_config(config)
 
     def sigterm_handler(_signum, _frame):
@@ -188,21 +188,21 @@ def serve(config: Config, args: argparse.Namespace):
 
 def push_reset(config: Config, args: argparse.Namespace):
     device_id = find_device(args.device or config.get("main", {}).get("device"))
-    watchdog = drivers.init_device(device_id)
+    watchdog = drivers.create_device(device_id)
     watchdog.update_config(config)
     watchdog.reset()
 
 
 def push_power(config: Config, args: argparse.Namespace):
     device_id = find_device(args.device or config.get("main", {}).get("device"))
-    watchdog = drivers.init_device(device_id)
+    watchdog = drivers.create_device(device_id)
     watchdog.update_config(config)
     watchdog.power()
 
 
 def power_cycle(config: Config, args: argparse.Namespace):
     device_id = find_device(args.device or config.get("main", {}).get("device"))
-    watchdog = drivers.init_device(device_id)
+    watchdog = drivers.create_device(device_id)
     watchdog.update_config(config)
     watchdog.power_cycle()
 

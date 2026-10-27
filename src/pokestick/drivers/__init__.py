@@ -7,7 +7,7 @@ from .watchdog_pro2 import WatchdogPro2
 DRIVERS: list[type[Watchdog]] = [WatchdogPro2]
 
 
-def init_device(device: DeviceId) -> Watchdog:
+def create_device(device: DeviceId) -> Watchdog:
     for driver in DRIVERS:
         if driver.is_compatible(device):
             return driver(device)
