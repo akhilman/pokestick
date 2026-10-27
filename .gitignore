@@ -1,0 +1,8 @@
+.python-version
+.ropeproject
+.venv
+build
+dist
+uv.lock
+**/__pycache__
+**/*.egg-info

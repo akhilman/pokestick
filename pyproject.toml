@@ -1,0 +1,30 @@
+[project]
+name = "pokestick"
+version = "0.1.0"
+description = "Daemon for hardware watchdog USB WATCHDOG PRO2"
+readme = "README.md"
+authors = [
+    { name = "Ildar Akhmetgaleev", email = "akhilman@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = ["pyserial"]
+
+keywords = ["watchdog", "reboot", "monitoring", "hang", "poke"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: No Input/Output (Daemon)",
+    "Intended Audience :: System Administrators",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: System :: Systems Administration",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Software Distribution",
+]
+
+[project.scripts]
+pokestick = "pokestick.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.4,<0.14.0"]
+build-backend = "uv_build"
