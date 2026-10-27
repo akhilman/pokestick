@@ -189,18 +189,21 @@ def serve(config: Config, args: argparse.Namespace):
 def push_reset(config: Config, args: argparse.Namespace):
     device_id = find_device(args.device or config.get("main", {}).get("device"))
     watchdog = drivers.init_device(device_id)
+    watchdog.update_config(config)
     watchdog.reset()
 
 
 def push_power(config: Config, args: argparse.Namespace):
     device_id = find_device(args.device or config.get("main", {}).get("device"))
     watchdog = drivers.init_device(device_id)
+    watchdog.update_config(config)
     watchdog.power()
 
 
 def power_cycle(config: Config, args: argparse.Namespace):
     device_id = find_device(args.device or config.get("main", {}).get("device"))
     watchdog = drivers.init_device(device_id)
+    watchdog.update_config(config)
     watchdog.power_cycle()
 
 
