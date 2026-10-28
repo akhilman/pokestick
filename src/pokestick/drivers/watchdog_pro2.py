@@ -222,6 +222,6 @@ def write_config(port: serial.Serial, hw_config: HwConfig):
         return
 
     request = encode_config_request(updated)
-    response_after = send_request(port, (request))
+    response_after = send_request(port, request)
 
     assert request[2:] == response_after[2:].rstrip()
