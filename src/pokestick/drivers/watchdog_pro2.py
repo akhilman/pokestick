@@ -168,10 +168,10 @@ def decode_config_response(data: bytes) -> ConfigDigits:
 def encode_config_request(digits: ConfigDigits) -> bytes:
     if len(digits) != 11:
         raise ValueError(
-            f"The length of the config tuple should be 11, provided tuple has {len(digits)} items"
+            f"The length of the config tuple should be 11, given tuple has {len(digits)} items"
         )
     if not all(0 <= x < 16 for x in digits):
-        raise ValueError(f"All values should be in range 0-15, {digits:r} is given")
+        raise ValueError(f"All values must be in between 0 and 15, {digits:r} is given")
 
     command = "~W" + "".join(f"{x:X}" for x in digits)
 
@@ -203,7 +203,7 @@ def read_config(port: serial.Serial) -> HwConfig:
 
 
 def write_config(port: serial.Serial, hw_config: HwConfig):
-    """Write configuration to the watchdog and return its read-back values."""
+    """Write configuration to the watchdog."""
 
     response_pre = send_request(port, b"~F")
     digits = decode_config_response(response_pre)
@@ -224,4 +224,4 @@ def write_config(port: serial.Serial, hw_config: HwConfig):
     request = encode_config_request(updated)
     response_after = send_request(port, (request))
 
-    assert request[2:] == response_after[2:].strip()
+    assert request[2:] == response_after[2:].rstrip()
