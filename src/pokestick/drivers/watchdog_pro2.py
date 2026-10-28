@@ -173,7 +173,7 @@ def encode_config_request(digits: ConfigDigits) -> bytes:
     if not all(0 <= x < 16 for x in digits):
         raise ValueError(f"All values should be in range 0-15, {digits:r} is given")
 
-    command = "~W" + "".join(f"{x:x}" for x in digits)
+    command = "~W" + "".join(f"{x:X}" for x in digits)
 
     return command.encode("ascii")
 
