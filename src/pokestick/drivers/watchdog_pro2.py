@@ -183,12 +183,12 @@ def encode_config_request(digits: ConfigDigits) -> bytes:
 
 
 def send_request(port: serial.Serial, request: bytes) -> bytes:
-    logger.debug("> %s", request)
+    logger.debug("Tx: %s", request)
     port.reset_input_buffer()
     port.write(request)
     port.flush()
     response = port.read_until(b"\n")
-    logger.debug("< %s", response.rstrip())
+    logger.debug("Rx: %s", response.rstrip())
     return response
 
 
