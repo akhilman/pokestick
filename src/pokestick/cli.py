@@ -9,8 +9,7 @@ from collections.abc import Iterable, Iterator
 from pathlib import Path
 
 from . import APP_NAME, drivers
-from .drivers.abc import Config
-from .drivers.device_id import DeviceId
+from .device import Config, DeviceId
 
 logger = logging.getLogger()
 
@@ -120,7 +119,7 @@ def readable_file(value: str) -> Path:
     return path
 
 
-def list_devices(config: Config, args: argparse.Namespace):
+def list_devices(_config: Config, _args: argparse.Namespace):
     table = Table()
     table.add_row(
         [

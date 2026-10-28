@@ -1,7 +1,8 @@
 from collections.abc import Iterator
 
+from pokestick.device import DeviceId
+
 from .abc import Watchdog
-from .device_id import DeviceId
 from .watchdog_pro2 import WatchdogPro2
 
 DRIVERS: list[type[Watchdog]] = [WatchdogPro2]

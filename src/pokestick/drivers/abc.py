@@ -1,13 +1,10 @@
 import logging
 from abc import ABC, abstractmethod
 from collections.abc import Iterator
-from typing import Any
 
-from .device_id import DeviceId
+from pokestick.device import Config, DeviceId
 
 logger = logging.getLogger(__name__)
-
-Config = dict[str, dict[str, Any]]
 
 
 class Watchdog(ABC):

@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Self
+from typing import Any, Self
 
 from serial.tools.list_ports_linux import SysFS
+
+Config = dict[str, dict[str, Any]]
 
 
 @dataclass

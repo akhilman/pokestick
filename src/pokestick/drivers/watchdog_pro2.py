@@ -8,8 +8,8 @@ from typing import Any
 import serial
 from serial.tools import list_ports
 
-from pokestick.drivers.abc import Config, Watchdog
-from pokestick.drivers.device_id import DeviceId
+from pokestick.device import Config, DeviceId
+from pokestick.drivers.abc import Watchdog
 
 VID, PID = 0x0483, 0xA26D
 CONFIG_SECTION = "watchdog_pro2"
