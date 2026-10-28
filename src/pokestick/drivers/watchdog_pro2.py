@@ -8,6 +8,7 @@ from typing import Any
 import serial
 from serial.tools import list_ports
 
+from pokestick import SignalReceived
 from pokestick.device import Config, DeviceId
 from pokestick.drivers.abc import Watchdog
 
@@ -62,8 +63,11 @@ class WatchdogPro2(Watchdog):
                 assert response.rstrip() in (b"Alert", b"~A")
                 try:
                     sleep(ping_interval)
-                except (KeyboardInterrupt, SystemExit) as exc:
-                    logger.info("%s received, exiting...", type(exc).__name__)
+                except (KeyboardInterrupt, SignalReceived) as exc:
+                    if isinstance(exc, SignalReceived):
+                        logger.info("%s received, exiting...", exc.signal.name)
+                    else:
+                        logger.info("%s received, exiting...", type(exc).__name__)
                     break
 
     def reset(self):

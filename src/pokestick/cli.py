@@ -8,7 +8,7 @@ import tomllib
 from collections.abc import Iterable, Iterator
 from pathlib import Path
 
-from . import APP_NAME, drivers
+from . import APP_NAME, ConfigurationError, DeviceNotFoundError, SignalReceived, drivers
 from .device import Config, DeviceId
 
 logger = logging.getLogger()
@@ -178,8 +178,8 @@ def serve(config: Config, args: argparse.Namespace):
     watchdog = drivers.create_device(device_id)
     watchdog.update_config(config)
 
-    def sigterm_handler(_signum, _frame):
-        raise SystemExit
+    def sigterm_handler(signum, _frame):
+        raise SignalReceived(signal.Signals(signum))
 
     signal.signal(signal.SIGTERM, sigterm_handler)
     watchdog.serve()
@@ -226,11 +226,3 @@ class Table:
             for item, width in zip(row, column_widths):
                 line_parts.append(item.ljust(width))
             yield "  ".join(line_parts)
-
-
-class DeviceNotFoundError(Exception):
-    pass
-
-
-class ConfigurationError(Exception):
-    pass
