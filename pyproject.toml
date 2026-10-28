@@ -1,7 +1,7 @@
 [project]
 name = "pokestick"
 version = "0.1.0"
-description = "Daemon for hardware watchdog USB WATCHDOG PRO2"
+description = "A Linux daemon that pings a hardware USB watchdog and lets it physically reboot the PC when the pings stop."
 readme = "README.md"
 authors = [
     { name = "Ildar Akhmetgaleev", email = "akhilman@gmail.com" }

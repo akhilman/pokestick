@@ -23,7 +23,7 @@ def main():
         "--config",
         "-c",
         type=readable_file,
-        help="specify config file to use (could be .toml or .json)",
+        help="specify a configuration file (.toml or .json)",
     )
     parser.add_argument("--debug", action="store_true", help="enable debug output")
 
@@ -32,23 +32,23 @@ def main():
     cmd = subcommands.add_parser("list", help="list connected watchdog devices")
     cmd.set_defaults(func=list_devices)
 
-    cmd = subcommands.add_parser("config", help="dump current config")
+    cmd = subcommands.add_parser("config", help="dump the current configuration")
     add_device_arg(cmd)
     cmd.set_defaults(func=dump_config)
 
-    cmd = subcommands.add_parser("serve", help="run the daemon")
+    cmd = subcommands.add_parser("serve", help="run the watchdog daemon")
     add_device_arg(cmd)
     cmd.set_defaults(func=serve)
 
-    cmd = subcommands.add_parser("reset", help="push reset button")
+    cmd = subcommands.add_parser("reset", help="trigger the reset action")
     add_device_arg(cmd)
     cmd.set_defaults(func=push_reset)
 
-    cmd = subcommands.add_parser("power", help="push power button")
+    cmd = subcommands.add_parser("power", help="trigger the power action")
     add_device_arg(cmd)
     cmd.set_defaults(func=push_power)
 
-    cmd = subcommands.add_parser("power-cycle", help="trigger power cycle")
+    cmd = subcommands.add_parser("power-cycle", help="trigger a power cycle")
     add_device_arg(cmd)
     cmd.set_defaults(func=power_cycle)
 
@@ -70,7 +70,7 @@ def add_device_arg(cmd: argparse.ArgumentParser):
     cmd.add_argument(
         "--device",
         "-d",
-        help="tty device to use, will be selected automatically if not specified",
+        help="device to use, will be selected automatically if not specified",
     )
 
 
