@@ -52,7 +52,7 @@ class WatchdogPro2(Watchdog):
         logger.info("Starting server for %s", self.device_id())
         with unpause_context(self.port) as port:
             hw_config = read_config(port)
-            ping_interval = min(hw_config.heartbeat_timeout * 60 / 10, 30)
+            ping_interval = min(hw_config.heartbeat_timeout * 60 / 10, 15)
             logger.debug("Ping interval is %s", ping_interval)
             try:
                 while True:
