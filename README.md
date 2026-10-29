@@ -61,7 +61,7 @@ pokestick serve --device 313134574E30531500260049
 pokestick config --device ttyACM0
 ```
 
-The selector can match any part of a device's fields except the `DEVICE` path's `/dev/` prefix. Matching against the device path is case-sensitive; matching against the other fields is case-insensitive.
+The selector can match any part of a device's fields. Matching against the device path is case-sensitive; matching against the other fields is case-insensitive.
 
 If `--device` is omitted, a device is selected automatically.
 
@@ -92,10 +92,16 @@ Example output:
 }
 ```
 
-The configuration can be stored in JSON or TOML format. Use `--config` to specify a particular file:
+Use `--config` to merge default or device's configuration with options from config file particular file:
 
 ```bash
 pokestick --config /path/to/config.toml config
+```
+
+Use `--device` to dump configuration for the particular device:
+
+```bash
+pokestick --device 0x483:0xa26d config
 ```
 
 ### Configuration sections
@@ -136,6 +142,12 @@ Specify a device explicitly if necessary:
 
 ```bash
 pokestick serve --device 313134574E30531500260049
+```
+
+Or configuration file:
+
+```bash
+pokestick serve --config /opt/pokestick/config.json
 ```
 
 The daemon periodically sends heartbeats to the watchdog. If the PC stops sending them, the hardware watchdog can initiate recovery independently of the daemon.
