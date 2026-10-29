@@ -54,18 +54,17 @@ class WatchdogPro2(Watchdog):
             hw_config = read_config(port)
             ping_interval = min(hw_config.heartbeat_timeout * 60 / 10, 30)
             logger.debug("Ping interval is %s", ping_interval)
-            while True:
-                request = b"~U"
-                response = send_request(port, request)
-                assert response.rstrip() in (b"Alert", b"~A")
-                try:
+            try:
+                while True:
+                    request = b"~U"
+                    response = send_request(port, request)
+                    assert response.rstrip() in (b"Alert", b"~A")
                     sleep(ping_interval)
-                except (KeyboardInterrupt, SignalReceived) as exc:
-                    if isinstance(exc, SignalReceived):
-                        logger.info("%s received, exiting...", exc.signal.name)
-                    else:
-                        logger.info("%s received, exiting...", type(exc).__name__)
-                    break
+            except (KeyboardInterrupt, SignalReceived) as exc:
+                if isinstance(exc, SignalReceived):
+                    logger.info("%s received, exiting...", exc.signal.name)
+                else:
+                    logger.info("%s received, exiting...", type(exc).__name__)
 
     def reset(self):
         with self.port as port:
