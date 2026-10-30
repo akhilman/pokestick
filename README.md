@@ -10,6 +10,21 @@ A Linux daemon that pings a USB hardware watchdog and allows it to physically re
 
 More devices could be added later. See `src/pokestick/drviers` for details.
 
+## Installation
+
+Instruction is written for Debian trixie.
+
+1. Install the virtual environment module: `sudo apt install python3-venv`
+2. Create a user with a home directory `useradd --home-dir /opt/pokestick --create-home --groups dialout --system --shell /usr/sbin/nologin pokestick`
+3. Initialize a virtual environment `sudo -u pokestick python3 -m venv ~pokestick`
+4. Install the package from GitHub `sudo -u pokestick ~pokestick/bin/pip install git+https://github.com/akhilman/pokestick.git`
+5. List connected devices `sudo -u pokestick ~pokestick/bin/pokestick list`
+6. Copy `contrib/systemd/pokestick.service` from this repository to `/etc/systemd/system/`, edit service file and make sure that path matches
+7. Reload systemd `systemctl daemon-reload`
+8. Enable and start pokestick `systemctl enable --now pokestick.service`
+
+The group `dialout` has write permission to `/dev/ttyACM*` devices by default. If you want, you may create special group for watchdog devices and write appropriate udev rules.
+
 ## Usage
 
 ```text

@@ -6,7 +6,8 @@ StartLimitBurst=5
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/pokestick serve
+ExecStart=/opt/pokestick/bin/pokestick serve
+User=pokestick
 Restart=on-failure
 RestartSec=5s
 
