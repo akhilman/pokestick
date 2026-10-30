@@ -6,7 +6,7 @@ A Linux daemon that pings a USB hardware watchdog and allows it to physically re
 
 ## Supported watchdog devices
 
-* 0x483:0xa26d USB Watchdog - Open Development
+* 0x483:0xa26d [USB Watchdog Pro2](https://unitx.pro/products/watchdog/pro2/) by [Open Development](https://unitx.pro/)
 
 More devices could be added later. See `src/pokestick/drviers` for details.
 
