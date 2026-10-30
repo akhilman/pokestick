@@ -60,12 +60,8 @@ class WatchdogPro2(Watchdog):
                     response = send_request(port, request)
                     assert response.rstrip() in (b"Alert", b"~A")
                     sleep(ping_interval)
-            except (KeyboardInterrupt, SignalReceived) as exc:
-                if isinstance(exc, SignalReceived):
-                    signal = exc.signal.name
-                else:
-                    signal = type(exc).__name__
-                logger.info("%s received, exiting...", signal)
+            except SignalReceived as exc:
+                logger.info("%s received, exiting...", exc.signal.name)
 
     def reset(self):
         with self.port as port:

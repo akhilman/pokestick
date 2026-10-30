@@ -178,10 +178,11 @@ def serve(config: Config, args: argparse.Namespace):
     watchdog = drivers.create_device(device_id)
     watchdog.update_config(config)
 
-    def sigterm_handler(signum, _frame):
+    def signal_handler(signum, _frame):
         raise SignalReceived(signal.Signals(signum))
 
-    signal.signal(signal.SIGTERM, sigterm_handler)
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
     watchdog.serve()
 
 
