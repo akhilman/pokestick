@@ -1,6 +1,6 @@
 [project]
 name = "pokestick"
-version = "0.1.1"
+version = "0.1.2"
 description = "A Linux daemon that pings a hardware USB watchdog and lets it physically reboot the PC when the pings stop."
 readme = "README.md"
 authors = [
